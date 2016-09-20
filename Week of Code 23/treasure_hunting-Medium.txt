@@ -1,0 +1,52 @@
+The problem
+
+Sam is a young treasure hunter located at point (0, 0) and wants to get to the amazing treasure at point (x, y).
+
+He has a weird machine that can transport him from some point (x, y) to point (x, y) + k(a, b), where (a, b) is a direction vector
+and k is a real number called a tangent coefficient. Let (a_, b_) be the vector orthogonal to (a, b) which has the same length and
+lies counter-clockwise from (a, b); Sam can then also move from point (x, y) to point (x, y) + n(a_, b_), where n is a real number
+called a normal coefficient.
+
+Given a, b, x, and y, find the values of k and n for Sam's journey from point (0, 0) to point (x, y) using the weird machine.
+Then print the value of k on a new line and the value of n on the subsequent line.
+
+Input Format
+
+The first line contains two space-separated integers denoting the respective values of x and y.
+The second line contains two space-separated integers denoting the respective values of a and b.
+
+Constraints
+
+1 <= x, y, a, b <= 10 ^ 9
+
+Output Format
+
+Find two real numbers, k and n, such that k(a, b) + n(a_, b_) = (x, y). Then print k as your first line of output and n as
+your second line of output. Your answer is considered to be correct if its absolute error is <= - 10 ^ -4.
+
+The solution
+
+function processData(input) {
+    input = input.split('\n').map(val => val.split(' '));
+    var x = +input[0][0];
+    var y = +input[0][1];
+    var a = +input[1][0];
+    var b = +input[1][1];
+    var a_ = b;
+    var b_ = -a;
+    var k = ((b_ * x - a_ * y) * 100000) / ((b_ * a - a_ * b) * 100000);
+    var n = -((b * x - a * y) * 100000) / ((a_ * b - a * b_) * 100000);
+    console.log(k.toPrecision(12));
+    console.log(n.toPrecision(12));
+}
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+   processData(_input);
+});

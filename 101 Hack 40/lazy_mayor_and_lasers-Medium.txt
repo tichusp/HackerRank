@@ -1,0 +1,77 @@
+The problem
+
+The Mayor of Byteland wants to shorten some buildings that are obstructing Byteland's skyline.
+
+There are n vertical buildings having heights h1, h2, h3, ...hn. Each building can be assumed to be of infinitesimally small width.
+The base of building i is located at position i on the x-axis. This means the first building is at position 1, the second is at position 2, and so on.
+
+The Mayor decides to use lasers to reduce the height of the buildings using a laser with an infinite beam which can be placed at a position on x-axis.
+However, this laser can be fired only at a 45 point angle with the negative x-axis. When the laser passes through an existing building, the part of the building
+above the laser is destroyed. Note that the laser doesn't affect the building at the position from which the laser was fired.
+
+The Mayor orders that m lasers be fired from positions xm1, xm2, ...xmm, one by one. Help the Mayor by finding and printing the remaining heights of each building
+after all  lasers are fired.
+
+Input Format
+
+The first line contains a single integer, n, denoting the number of buildings.
+The second line contains n space-separated integers denoting the respective initial heights of the buildings (i.e., h1, h2, ...hn).
+The third line contains a single integer, m, denoting the number of lasers that will fire.
+The fourth line contains m space-separated integers describing the respective positions from which the lasers will be fired (i.e., xm1, xm2, ...xmm).
+
+Constraints
+
+1 <= hi <= 10 ^ 9
+1 <= xi <= n
+1 <= n, m <= 10 ^ 5
+
+Subtasks
+
+For 40% of the maximum score, 1 <= n, m <= 10 ^ 3
+Output Format
+
+Print a single integer denoting the sum of the remaining building heights after all the lasers are fired.
+
+The solution
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+var input = "";
+process.stdin.on("data", function (chunk) {
+    input += chunk;
+});
+
+process.stdin.on("end", function () {
+    main();
+});
+
+function main() {
+    input = input.split('\n');
+    var buildings = +input[0];
+    var buildingHeights = input[1].split(' ').map(Number);
+    var laserPositions = input[3].split(' ').map(Number).sort((a, b) => a - b);
+    var helper;
+    var index;
+    var starter = 0;
+    for (var i = 0; i < buildings; i++) {
+        helper = 1;
+        index = starter;
+        if (laserPositions[laserPositions.length - 1] < i + 2) {
+            break;
+        }
+        for (var j = i + 2, len = i + buildingHeights[i]; j <= len; j++) {
+            while (laserPositions[index] < j) {
+                index++;
+            }
+            if (j == i + 2) {
+                starter = index;
+            }
+            if (laserPositions[index] === j) {
+                buildingHeights[i] = helper;
+                break;
+            }
+            helper++;
+        }
+    }
+    console.log(buildingHeights.reduce((a, b) => a + b));
+}

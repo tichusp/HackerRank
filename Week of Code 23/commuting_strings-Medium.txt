@@ -1,0 +1,55 @@
+The problem
+
+Marc is young lover of strings who wants your help with the following problem. Given a string, s, of lowercase English alphabetic
+letters and an integer, m, calculate the number of string t's such that:
+
+Each t consists of lowercase English alphabetic letters
+1 <= length(t) <= m
+s.t = t.s, meaning their concatenation is commutative.
+Print the number of string t's modulo 10 ^ 9 + 7.
+
+Input Format
+
+The first line contains a string denoting s.
+The second line contains an integer denoting m.
+
+Constraints
+
+1 <= length(s) <= 5 * 10 ^ 5
+s consists of lowercase English alphabetic letters only (i.e., a to z).
+1 <= m <= 2 * 10 ^ 9
+
+Output Format
+
+Print the number of string t's satisfying the conditions above, modulo 10 ^ 9 + 7.
+
+The solution
+
+function processData(input) {
+    input = input.split('\n');
+    var i = 1;
+    var len = input[0].length;
+    var str = input[0];
+    while (i < len / 2) {
+        while (len % i !== 0) {
+            i++;
+        }
+        if (input[0].slice(0, i).repeat(len / i) === input[0]) {
+            str = input[0].slice(0, i);
+            break;
+        }
+        i++;
+    }
+    console.log(Math.floor(input[1] / str.length) % (Math.pow(10, 9) + 7));
+}
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+   processData(_input);
+});

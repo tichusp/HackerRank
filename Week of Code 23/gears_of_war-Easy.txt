@@ -1,0 +1,42 @@
+The problem.
+
+Alex is preparing for a programming contest and decides the gears turning in his head are at war with his own laziness.
+He imagines chains of n circularly linked gears trying to turn in his head, and wonders under which circumstances they might be
+able to turn together in a single chain and when they might be locked (i.e., unable to rotate together).
+
+Alex decides to set a problem for himself by creating q queries where each query takes the form of an integer, n, denoting some number
+of circularly linked gears. For each query, print Yes on a new line if the gears can turn together; otherwise, print No.
+
+Input Format
+
+The first line contains single integer, q, denoting the number of queries. Each line i of the q subsequent lines contains a single integer, n,
+denoting the number of gears for that query.
+
+Constraints
+
+1 <= q <= 10^5
+3 <= n <= 10^5
+
+Output Format
+
+For each query, print Yes on a new line if it is possible to rotate all  gears simultaneously; otherwise, print No.
+
+The solution.
+
+function processData(input) {
+    input = input.split('\n').slice(1);
+    for (var i = 0, len = input.length; i < len; i++) {
+        console.log(input[i] % 2 ? 'No' : 'Yes');
+    }
+}
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+   processData(_input);
+});
